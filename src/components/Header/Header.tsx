@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, IconButton, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
+import { AppBar, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -22,14 +21,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Header: FC = () => {
   const classes = useStyles();
-
+  // TODO make hamburger as favourites artists side panel?
+  // TODO create breadcrumbs
   return (
     <AppBar className={classes.wrapper} position="static">
       <Toolbar>
-        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          <Menu />
-        </IconButton>
-        <Typography className={classes.title}>Artists</Typography>
+        <Typography variant="h5" className={classes.title}>
+          Fav artists
+        </Typography>
         <Link component={RouterLink} to="/" variant="body1" className={classes.link}>
           Home
         </Link>
