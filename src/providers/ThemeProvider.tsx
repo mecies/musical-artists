@@ -14,11 +14,12 @@ const themeOptions: ThemeOptions = {
     },
     background: {
       default: '#303030',
+      paper: '#f5f6f7',
     },
   },
 };
 
-const theme = createMuiTheme(themeOptions);
+export const theme = createMuiTheme(themeOptions);
 
 const ThemeProvider: FC = ({ children }) => (
   <MuiThemeProvider theme={theme}>

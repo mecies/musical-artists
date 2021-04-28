@@ -1,0 +1,8 @@
+// * Disable param reassign rule for reducers directory because
+// * reduxjs/toolkit assures that you can safely mutate state in reducers
+// * for reference see: https://redux-toolkit.js.org/api/createSlice#reducers
+{
+  "rules": {
+    "no-param-reassign": "off"
+  }
+}

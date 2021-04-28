@@ -1,11 +1,9 @@
-import React, { ChangeEvent, FC } from 'react';
-import { FormLabel, InputBase, makeStyles, Paper } from '@material-ui/core';
+import React, { FC } from 'react';
+import { FormLabel, InputBase, InputBaseProps, makeStyles, Paper } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 
-type Props = {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+type Props = InputBaseProps & {
   className?: string;
-  value: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -17,19 +15,18 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: 400,
     },
+    [theme.breakpoints.up('md')]: {
+      width: 450,
+    },
   },
   input: {
     flex: 1,
     height: 40,
     marginLeft: theme.spacing(1),
   },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
 }));
 
-export const SearchInput: FC<Props> = ({ className, onChange, value }) => {
+export const SearchInput: FC<Props> = ({ className, ...props }) => {
   const classes = useStyles();
 
   return (
@@ -40,8 +37,7 @@ export const SearchInput: FC<Props> = ({ className, onChange, value }) => {
           className={classes.input}
           placeholder="Search artists by name"
           inputProps={{ 'aria-label': 'Search for artists' }}
-          onChange={onChange}
-          value={value}
+          {...props}
         />
         <Search />
       </Paper>

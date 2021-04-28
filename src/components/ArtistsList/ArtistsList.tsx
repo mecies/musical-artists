@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: 400,
     },
+    [theme.breakpoints.up('md')]: {
+      width: 450,
+    },
   },
   listItem: {
     color: theme.palette.text.secondary,
@@ -35,14 +38,14 @@ export const ArtistsList: FC<Props> = ({ artists }) => {
 
   return (
     <List className={classes.list}>
-      {artists?.map(({ mbid, name, country }) => {
+      {artists?.map(({ mbid, name }) => {
         return (
           <Link component={RouterLink} to={`/artist/${mbid}`} key={mbid}>
             <ListItem className={classes.listItem}>
               <ListItemIcon>
                 <Person className={classes.listItemIcon} />
               </ListItemIcon>
-              <ListItemText primary={name} secondary={country} />
+              <ListItemText primary={name} />
             </ListItem>
           </Link>
         );

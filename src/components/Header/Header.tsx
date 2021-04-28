@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { useMediaQuery } from 'hooks/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -21,20 +22,23 @@ const useStyles = makeStyles((theme) => ({
 
 const Header: FC = () => {
   const classes = useStyles();
+  const { isMobile } = useMediaQuery();
   // TODO make hamburger as favourites artists side panel?
   // TODO create breadcrumbs
   return (
     <AppBar className={classes.wrapper} position="static">
       <Toolbar>
-        <Typography variant="h5" className={classes.title}>
-          Fav artists
+        <Typography className={classes.title}>
+          <Link component={RouterLink} to="/" variant="h5" className={classes.link}>
+            Fav artists
+          </Link>
         </Typography>
-        <Link component={RouterLink} to="/" variant="body1" className={classes.link}>
-          Home
-        </Link>
-        <Link component={RouterLink} to="/else" variant="body1" className={classes.link}>
-          Else
-        </Link>
+        {isMobile && (
+          <Link component={RouterLink} to="/" variant="body1" className={classes.link}>
+            Favourites
+            {/* TODO add favourites here */}
+          </Link>
+        )}
       </Toolbar>
     </AppBar>
   );
