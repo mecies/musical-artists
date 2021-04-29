@@ -18,6 +18,14 @@ const GET_ARTIST = gql`
         mbid
         name
         country
+        releases {
+          nodes {
+            title
+            mbid
+            date
+            country
+          }
+        }
       }
     }
   }

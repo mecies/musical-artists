@@ -1,29 +1,32 @@
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link, List, ListItem, ListItemIcon, ListItemText, makeStyles } from '@material-ui/core';
-import { Person } from '@material-ui/icons';
-import { Artist } from 'typings';
+import { Audiotrack } from '@material-ui/icons';
+import { Release } from 'typings';
 
 type Props = {
-  artists: Artist[];
+  artistMbid: string;
+  releases: Release[];
 };
 
 const useStyles = makeStyles((theme) => ({
   list: {
-    width: 300,
+    maxHeight: '40vh',
+    width: '100%',
+    overflowY: 'scroll',
   },
   listItem: {
+    width: '100%',
     color: theme.palette.text.secondary,
     borderBottom: `1px solid ${theme.palette.background.paper}`,
     '&:last-of-type': {
       borderBottom: 'none',
     },
-    width: '100%',
   },
   listItemContentWrapper: {
     display: 'flex',
+    padding: theme.spacing(0, 2),
     width: '100%',
-    height: '100%',
   },
   listItemIcon: {
     fill: theme.palette.background.paper,
@@ -36,19 +39,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ArtistsList: FC<Props> = ({ artists }) => {
+export const ReleasesList: FC<Props> = ({ artistMbid, releases }) => {
   const classes = useStyles();
 
   return (
     <List className={classes.list}>
-      {artists?.map(({ mbid, name }) => {
+      {releases?.map(({ mbid, title }) => {
         return (
           <ListItem className={classes.listItem} key={mbid}>
-            <Link component={RouterLink} to={`/artist/${mbid}`} className={classes.listItemContentWrapper}>
+            <Link
+              component={RouterLink}
+              to={`/artist/${artistMbid}/${mbid}`}
+              className={classes.listItemContentWrapper}
+            >
               <ListItemIcon>
-                <Person className={classes.listItemIcon} />
+                <Audiotrack className={classes.listItemIcon} />
               </ListItemIcon>
-              <ListItemText className={classes.listItemText} primary={name} />
+              <ListItemText className={classes.listItemText} primary={title} />
             </Link>
           </ListItem>
         );

@@ -11,4 +11,5 @@ export type Release = {
   title: string;
   date: string;
   country: string;
+  mbid: string;
 };

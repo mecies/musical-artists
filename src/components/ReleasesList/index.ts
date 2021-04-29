@@ -1,0 +1,1 @@
+export { ReleasesList } from './ReleasesList';

@@ -8,6 +8,10 @@ type Props = BoxProps & {
 };
 
 const useStyles = makeStyles((theme) => ({
+  title: {
+    marginBottom: theme.spacing(4),
+    color: theme.palette.text.secondary,
+  },
   text: {
     color: theme.palette.text.secondary,
   },
@@ -18,6 +22,9 @@ const FavouriteArtists: FC<Props> = ({ artists, ...props }) => {
 
   return (
     <Box {...props}>
+      <Typography className={classes.title} variant="h2">
+        Favourites
+      </Typography>
       {artists && artists.length > 0 ? (
         <ArtistsList artists={artists} />
       ) : (

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Artist } from 'typings';
 
-export type InitialAppStore = {
+export type InitialArtistState = {
   favouriteArtists: Artist[];
 };
-const initialState: InitialAppStore = {
+const initialState: InitialArtistState = {
   favouriteArtists: [],
 };
 

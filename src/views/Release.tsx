@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles, Typography } from '@material-ui/core';
-import { ArtistCard } from 'components/ArtistCard';
 import { Loader } from 'components/Loader';
-import { useArtist } from 'hooks/useArtist';
+import { ReleaseCard } from 'components/ReleaseCard';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
+import { useRelease } from 'hooks/useRelease';
 
 const useStyles = makeStyles((theme) => ({
   artistWrapper: {
@@ -18,21 +18,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Artist = () => {
+export const Release = () => {
   const classes = useStyles();
-  const { mbid } = useParams<{ mbid: string }>();
-  const { setArtistPage } = useBreadcrumbs();
-  const { data: artist, loading, error } = useArtist(mbid);
+  const { setReleasePage } = useBreadcrumbs();
+  const { releaseMbid } = useParams<{ releaseMbid: string }>();
+  const { data: release, loading, error } = useRelease(releaseMbid);
 
   useEffect(() => {
-    setArtistPage(mbid);
-  }, [mbid, setArtistPage]);
+    setReleasePage(releaseMbid);
+  }, [releaseMbid, setReleasePage]);
 
   return (
     <>
       {loading && <Loader className={classes.loader} />}
       {error && <Typography className={classes.errorMessage}>{error.message}</Typography>}
-      {artist && <ArtistCard artist={artist} className={classes.artistWrapper} />}
+      {release && <ReleaseCard release={release} className={classes.artistWrapper} />}
     </>
   );
 };

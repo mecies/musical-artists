@@ -12,12 +12,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: 300,
-    [theme.breakpoints.up('sm')]: {
-      width: 400,
-    },
-    [theme.breakpoints.up('md')]: {
-      width: 450,
-    },
   },
   input: {
     flex: 1,

@@ -1,16 +1,17 @@
-import { ChangeEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { uiModule } from 'store/reducers/ui';
 import { useDebounce } from 'use-debounce/lib';
 
 export const useSearchQuery = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
+  const searchQuery = useSelector<RootState, string>((state) => state.ui.searchQuery);
+  const setSearchQuery = (query: string) => dispatch(uiModule.actions.setSearchQuery(query));
   const [debouncedSearchQuery] = useDebounce(searchQuery, 1000);
-  const handleSetSearchQuery = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setSearchQuery(e.target.value);
-  };
 
   return {
     searchQuery,
     debouncedSearchQuery,
-    handleSetSearchQuery,
+    setSearchQuery,
   };
 };
