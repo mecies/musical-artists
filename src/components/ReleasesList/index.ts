@@ -1,1 +1,0 @@
-export { ReleasesList } from './ReleasesList';

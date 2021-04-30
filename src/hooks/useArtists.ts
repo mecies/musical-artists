@@ -11,13 +11,12 @@ type ArtistsData = {
 
 type ArtistsVariables = {
   query: string;
-  first: number;
 };
 
 const GET_ARTISTS = gql`
-  query GetArtists($query: String!, $first: Int!) {
+  query GetArtists($query: String!) {
     search {
-      artists(query: $query, first: $first) {
+      artists(query: $query) {
         nodes {
           mbid
           name
@@ -31,8 +30,6 @@ export const useArtists = (query: string) => {
   const { loading, error, data } = useQuery<ArtistsData, ArtistsVariables>(GET_ARTISTS, {
     variables: {
       query,
-      // TODO pagination or infinite scrolling
-      first: 10,
     },
     skip: !query,
   });

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Box, BoxProps, makeStyles, Typography } from '@material-ui/core';
-import { ArtistsList } from 'components/ArtistsList';
+import { Person } from '@material-ui/icons';
+import { List, ListItem } from 'components/List';
 import { Artist } from 'typings';
 
 type Props = BoxProps & {
@@ -15,18 +16,28 @@ const useStyles = makeStyles((theme) => ({
   text: {
     color: theme.palette.text.secondary,
   },
+  listItemIcon: {
+    fill: theme.palette.background.paper,
+  },
 }));
 
 const FavouriteArtists: FC<Props> = ({ artists, ...props }) => {
   const classes = useStyles();
+  const hasFavouriteArtists = artists && artists.length > 0;
 
   return (
     <Box {...props}>
-      <Typography className={classes.title} variant="h2">
+      <Typography className={classes.title} variant="h3">
         Favourites
       </Typography>
-      {artists && artists.length > 0 ? (
-        <ArtistsList artists={artists} />
+      {hasFavouriteArtists ? (
+        <List>
+          {artists?.map(({ mbid, name }) => (
+            <ListItem key={mbid} to={`/artist/${mbid}`} text={name}>
+              <Person className={classes.listItemIcon} />
+            </ListItem>
+          ))}
+        </List>
       ) : (
         <Typography className={classes.text}>Visit artist profile to add him to favourites list</Typography>
       )}

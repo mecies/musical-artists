@@ -1,7 +1,17 @@
-import React, { FC } from 'react';
-import { Button, Card, CardActions, CardContent, CardProps, makeStyles, Typography } from '@material-ui/core';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
-import { ReleasesList } from 'components/ReleasesList';
+import React, { FC, useState } from 'react';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardProps,
+  IconButton,
+  makeStyles,
+  Snackbar,
+  Typography,
+} from '@material-ui/core';
+import { Close, Favorite, FavoriteBorder, LibraryMusic } from '@material-ui/icons';
+import { List, ListItem } from 'components/List';
 import { useFavouriteArtists } from 'hooks/useFavouriteArtists';
 import { Artist } from 'typings';
 
@@ -35,16 +45,22 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginLeft: theme.spacing(1),
   },
+  listItemIcon: {
+    fill: theme.palette.background.paper,
+  },
 }));
 
 const ArtistCard: FC<Props> = ({ artist, ...props }) => {
   const classes = useStyles();
+  const [isSnackbardOpen, setIsSnackbardOpen] = useState(false);
   const { isFavouriteArtistCheck, addFavouriteArtist, removeFavouriteArtist } = useFavouriteArtists();
   const isFavouriteArtist = isFavouriteArtistCheck(artist);
-  const artistHasRelases = artist.releases?.nodes?.length && artist.releases.nodes.length > 0;
-  // todo refactor,
-
+  const releases = artist.releases?.nodes;
+  const artistHasRelases = !!(releases?.length && releases.length > 0);
+  const toggleSnackbarOpen = () => setIsSnackbardOpen(!isSnackbardOpen);
   const handleToggleFavouriteArtist = () => {
+    toggleSnackbarOpen();
+
     if (!isFavouriteArtist) {
       addFavouriteArtist(artist);
     } else {
@@ -64,30 +80,47 @@ const ArtistCard: FC<Props> = ({ artist, ...props }) => {
           {!isFavouriteArtist ? (
             <>
               Add to favorites
-              <Favorite className={classes.icon} />
+              <FavoriteBorder className={classes.icon} />
             </>
           ) : (
             <>
               Remove from favorites
-              <FavoriteBorder className={classes.icon} />
+              <Favorite className={classes.icon} />
             </>
           )}
         </Button>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          open={isSnackbardOpen}
+          autoHideDuration={6000}
+          onClose={toggleSnackbarOpen}
+          message={`${artist.name} ${
+            isFavouriteArtist ? 'has been added to your favorites' : 'has been removed from you favourites'
+          }`}
+          action={
+            <>
+              <IconButton size="small" aria-label="close" color="inherit" onClick={toggleSnackbarOpen}>
+                <Close fontSize="small" />
+              </IconButton>
+            </>
+          }
+        />
       </CardActions>
       <CardContent className={classes.content}>
-        {artistHasRelases ? (
-          <>
-            <Typography className={classes.releasesTitle} variant="h6">
-              Popular releases:
-            </Typography>
-            <ReleasesList artistMbid={artist.mbid} releases={artist.releases?.nodes || []} />
-          </>
-        ) : (
-          <>
-            <Typography className={classes.releasesTitle} variant="h6">
-              Arist does not have any release
-            </Typography>
-          </>
+        <Typography className={classes.releasesTitle} variant="h6">
+          {artistHasRelases ? 'Popular releases: ' : 'Arist does not have any releases'}
+        </Typography>
+        {artistHasRelases && (
+          <List>
+            {releases?.map(({ mbid, title }) => (
+              <ListItem key={mbid} to={`/artist/${artist.mbid}/${mbid}`} text={title}>
+                <LibraryMusic className={classes.listItemIcon} />
+              </ListItem>
+            ))}
+          </List>
         )}
       </CardContent>
     </Card>

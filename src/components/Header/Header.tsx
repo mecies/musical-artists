@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Breadcrumbs, Drawer, IconButton, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import { Favorite } from '@material-ui/icons';
-import { ArtistsList } from 'components/ArtistsList';
+import { Favorite, FavoriteBorder, Person } from '@material-ui/icons';
+import { List, ListItem } from 'components/List';
 import { useFavouriteArtists } from 'hooks/useFavouriteArtists';
 import { useMediaQuery } from 'hooks/useMediaQuery';
 import { RootState } from 'store';
@@ -21,18 +21,24 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     color: theme.palette.text.secondary,
-    margin: theme.spacing(0, 2),
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(0, 2),
+    },
   },
   iconButton: {
     color: theme.palette.text.secondary,
   },
   drawer: {
+    minWidth: 200,
     backgroundColor: theme.palette.background.default,
   },
   infoText: {
     color: theme.palette.text.secondary,
     margin: theme.spacing(4),
     maxWidth: 200,
+  },
+  listItemIcon: {
+    fill: theme.palette.background.paper,
   },
 }));
 
@@ -67,11 +73,17 @@ const Header: FC = () => {
         {isMobile && (
           <>
             <IconButton onClick={toggleDrawer} className={classes.iconButton}>
-              <Favorite />
+              {hasFavouriteArtists ? <Favorite /> : <FavoriteBorder />}
             </IconButton>
             <Drawer classes={{ paper: classes.drawer }} anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
               {hasFavouriteArtists ? (
-                <ArtistsList artists={favouriteArtists || []} />
+                <List>
+                  {favouriteArtists?.map(({ mbid, name }) => (
+                    <ListItem key={mbid} to={`/artist/${mbid}`} text={name}>
+                      <Person className={classes.listItemIcon} />
+                    </ListItem>
+                  ))}
+                </List>
               ) : (
                 <Typography variant="h5" className={classes.infoText}>
                   Visit artist profile to add him to favourites list

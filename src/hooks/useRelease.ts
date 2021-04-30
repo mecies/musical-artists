@@ -19,6 +19,12 @@ const GET_RELEASE = gql`
         date
         country
         mbid
+        recordings {
+          nodes {
+            mbid
+            title
+          }
+        }
       }
     }
   }

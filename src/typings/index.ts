@@ -8,8 +8,16 @@ export type Artist = {
 };
 
 export type Release = {
+  mbid: string;
   title: string;
   date: string;
   country: string;
+  recordings?: {
+    nodes: Recording[];
+  };
+};
+
+type Recording = {
   mbid: string;
+  title: string;
 };
