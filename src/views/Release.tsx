@@ -21,12 +21,12 @@ const useStyles = makeStyles((theme) => ({
 export const Release = () => {
   const classes = useStyles();
   const { setReleasePage } = useBreadcrumbs();
-  const { releaseMbid } = useParams<{ releaseMbid: string }>();
+  const { mbid, releaseMbid } = useParams<{ mbid: string; releaseMbid: string }>();
   const { data: release, loading, error } = useRelease(releaseMbid);
 
   useEffect(() => {
-    setReleasePage(releaseMbid);
-  }, [releaseMbid, setReleasePage]);
+    setReleasePage(mbid, releaseMbid);
+  }, [mbid, releaseMbid, setReleasePage]);
 
   return (
     <>

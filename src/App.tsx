@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Divider, Grid, makeStyles } from '@material-ui/core';
 import { FavouriteArtists } from 'components/FavouriteArtists/FavouriteArtists';
 import { Header } from 'components/Header';
-import { useFavouriteArtists } from 'hooks/useFavouriteArtists';
 import { useMediaQuery } from 'hooks/useMediaQuery';
 import { Artist } from 'views/Artist';
 import { Home } from 'views/Home';
@@ -42,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 const App: FC = () => {
   const classes = useStyles();
   const { isDesktop } = useMediaQuery();
-  const { favouriteArtists } = useFavouriteArtists();
 
   return (
     <Grid container className={classes.root}>
@@ -69,7 +67,7 @@ const App: FC = () => {
           </Grid>
         )}
         <Grid item xs={12} md={5} className={classes.container}>
-          {isDesktop && <FavouriteArtists artists={favouriteArtists} className={classes.favourites} />}
+          {isDesktop && <FavouriteArtists className={classes.favourites} />}
         </Grid>
       </Router>
     </Grid>

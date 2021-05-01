@@ -37,6 +37,6 @@ export const useArtists = (query: string) => {
   return {
     loading,
     error,
-    data: data?.search.artists.nodes,
+    data: data?.search.artists.nodes || [],
   };
 };

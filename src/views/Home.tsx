@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    width: 300,
   },
   title: {
     marginBottom: theme.spacing(4),
@@ -36,7 +37,7 @@ export const Home = () => {
   const { setHomePage } = useBreadcrumbs();
   const { searchQuery, debouncedSearchQuery, setSearchQuery } = useSearchQuery();
   const { data: artists, loading, error } = useArtists(debouncedSearchQuery);
-  const hasFoundArtists = artists && artists.length > 0;
+  const hasFoundArtists = artists.length > 0;
   const showEmptyResultMessage = !hasFoundArtists && !loading && debouncedSearchQuery;
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export const Home = () => {
         {error && <Typography className={classes.notFoundText}>{error.message}</Typography>}
         {hasFoundArtists && (
           <List>
-            {artists?.map(({ mbid, name }) => (
+            {artists.map(({ mbid, name }) => (
               <ListItem key={mbid} to={`/artist/${mbid}`} text={name}>
                 <Person className={classes.listItemIcon} />
               </ListItem>
@@ -63,7 +64,7 @@ export const Home = () => {
         )}
         {showEmptyResultMessage && (
           <Typography variant="h5" className={classes.notFoundText}>
-            No arists matching search query found
+            No artists matching search query found
           </Typography>
         )}
       </Box>

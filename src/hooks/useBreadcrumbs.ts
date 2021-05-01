@@ -14,7 +14,8 @@ export const useBreadcrumbs = () => {
     dispatch(uiModule.actions.setReleaseMbid(''));
   };
 
-  const setReleasePage = (releaseMbid: string) => {
+  const setReleasePage = (artistMbid: string, releaseMbid: string) => {
+    dispatch(uiModule.actions.setArtistMbid(artistMbid));
     dispatch(uiModule.actions.setReleaseMbid(releaseMbid));
   };
 

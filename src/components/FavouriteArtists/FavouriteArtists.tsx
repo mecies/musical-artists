@@ -2,11 +2,9 @@ import React from 'react';
 import { Box, BoxProps, makeStyles, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
-import { Artist } from 'models';
+import { useFavouriteArtists } from 'hooks/useFavouriteArtists';
 
-type FavouriteArtistsProps = BoxProps & {
-  artists?: Artist[];
-};
+type FavouriteArtistsProps = BoxProps;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -21,9 +19,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FavouriteArtists = ({ artists, ...props }: FavouriteArtistsProps) => {
+const FavouriteArtists = (props: FavouriteArtistsProps) => {
   const classes = useStyles();
-  const hasFavouriteArtists = artists && artists.length > 0;
+  const { favouriteArtists } = useFavouriteArtists();
+  const hasFavouriteArtists = favouriteArtists.length > 0;
 
   return (
     <Box {...props}>
@@ -32,7 +31,7 @@ const FavouriteArtists = ({ artists, ...props }: FavouriteArtistsProps) => {
       </Typography>
       {hasFavouriteArtists ? (
         <List>
-          {artists?.map(({ mbid, name }) => (
+          {favouriteArtists.map(({ mbid, name }) => (
             <ListItem key={mbid} to={`/artist/${mbid}`} text={name}>
               <Person className={classes.listItemIcon} />
             </ListItem>

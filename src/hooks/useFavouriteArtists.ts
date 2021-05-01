@@ -12,7 +12,7 @@ export const useFavouriteArtists = () => {
     favouriteArtists?.some((favoriteArtist) => favoriteArtist.mbid === artist.mbid);
 
   return {
-    favouriteArtists,
+    favouriteArtists: favouriteArtists || [],
     addFavouriteArtist,
     removeFavouriteArtist,
     isFavouriteArtistCheck,
