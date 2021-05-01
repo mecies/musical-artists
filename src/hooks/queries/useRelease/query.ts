@@ -5,8 +5,6 @@ const GET_RELEASE = gql`
     lookup {
       release(mbid: $mbid) {
         title
-        date
-        country
         mbid
         recordings {
           nodes {

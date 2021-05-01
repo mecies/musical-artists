@@ -7,13 +7,11 @@ import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { act, render, screen } from '@testing-library/react';
 import { artistModule } from 'store/reducers/artist';
 import { uiModule } from 'store/reducers/ui';
+import { ARTIST_MBID, RELEASE_MBID } from 'utils/mockTestData';
 
-import { Header } from './Header';
+import { Header } from '../Header';
 
 describe('Header component', () => {
-  const mbid = '7b24231e-faa5-4838-b6a8-6a2eb2727b37';
-  const releaseMbid = 'f7e385e0-8cde-43d6-818d-990a19b0850e';
-
   const store = createStore(
     combineReducers({
       artist: artistModule.reducer,
@@ -46,7 +44,7 @@ describe('Header component', () => {
     render(<HeaderWrapper />, { wrapper: MemoryRouter });
 
     act(() => {
-      store.dispatch(uiModule.actions.setArtistMbid(mbid));
+      store.dispatch(uiModule.actions.setArtistMbid(ARTIST_MBID));
       store.dispatch(uiModule.actions.setReleaseMbid(''));
     });
 
@@ -61,8 +59,8 @@ describe('Header component', () => {
     render(<HeaderWrapper />, { wrapper: MemoryRouter });
 
     act(() => {
-      store.dispatch(uiModule.actions.setArtistMbid(mbid));
-      store.dispatch(uiModule.actions.setReleaseMbid(releaseMbid));
+      store.dispatch(uiModule.actions.setArtistMbid(ARTIST_MBID));
+      store.dispatch(uiModule.actions.setReleaseMbid(RELEASE_MBID));
     });
 
     const searchBreadcrumb = screen.getByText(/search/i);

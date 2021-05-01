@@ -2,27 +2,13 @@ import React, { FC } from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { renderHook } from '@testing-library/react-hooks';
 import { Artist } from 'models';
+import { ARTISTS } from 'utils/mockTestData';
 
-import { GET_ARTISTS } from './query';
-import { useArtists } from './useArtists';
+import { GET_ARTISTS } from '../query';
+import { useArtists } from '../useArtists';
 
 describe('useArtists hook', () => {
   const query = 'Sele';
-
-  const artists: Artist[] = [
-    {
-      mbid: '4421af8a-2ea7-482a-a626-213cb2777404',
-      name: 'Sele',
-    },
-    {
-      mbid: 'f15c34cd-684c-424d-8a51-e04f06ee684e',
-      name: 'Afande Sele',
-    },
-    {
-      mbid: '4609b46a-c492-475a-bac1-3a5415d4c22e',
-      name: 'Paul Sele',
-    },
-  ];
 
   const artistsMockQuery = {
     request: {
@@ -35,7 +21,7 @@ describe('useArtists hook', () => {
       data: {
         search: {
           artists: {
-            nodes: artists,
+            nodes: ARTISTS,
             __typename: 'ArtistConnection',
           },
           __typename: 'SearchQuery',
@@ -79,7 +65,7 @@ describe('useArtists hook', () => {
 
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeUndefined();
-    expect<Artist[] | undefined>(result.current.data).toEqual(artists);
+    expect<Artist[]>(result.current.data).toEqual(ARTISTS);
   });
 
   it('should return error when request fails', async () => {

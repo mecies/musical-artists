@@ -67,9 +67,11 @@ const App: FC = () => {
             <Divider className={classes.divider} orientation="vertical" variant="middle" light />
           </Grid>
         )}
-        <Grid item xs={12} md={5} className={classes.container}>
-          {isDesktop && <FavouriteArtists className={classes.favourites} />}
-        </Grid>
+        {isDesktop && (
+          <Grid item md={5} className={classes.container}>
+            <FavouriteArtists className={classes.favourites} />
+          </Grid>
+        )}
       </Router>
     </Grid>
   );

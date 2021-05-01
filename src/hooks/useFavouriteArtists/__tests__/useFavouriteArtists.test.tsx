@@ -2,28 +2,12 @@ import { FC } from 'react';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { act, renderHook } from '@testing-library/react-hooks';
-import { Artist } from 'models';
 import { artistModule } from 'store/reducers/artist';
+import { ARTIST } from 'utils/mockTestData';
 
-import { useFavouriteArtists } from './useFavouriteArtists';
+import { useFavouriteArtists } from '../useFavouriteArtists';
 
 describe('useFavouriteArtists hook', () => {
-  const artist: Artist = {
-    mbid: '7b24231e-faa5-4838-b6a8-6a2eb2727b37',
-    name: 'KSI',
-    country: 'GB',
-    releases: {
-      nodes: [
-        {
-          title: 'Lighter',
-          mbid: 'f7e385e0-8cde-43d6-818d-990a19b0850e',
-          date: '2020-07-24',
-          country: 'XW',
-        },
-      ],
-    },
-  };
-
   const store = createStore(
     combineReducers({
       artist: artistModule.reducer,
@@ -38,10 +22,10 @@ describe('useFavouriteArtists hook', () => {
     });
 
     act(() => {
-      result.current.addFavouriteArtist(artist);
+      result.current.addFavouriteArtist(ARTIST);
     });
 
-    expect(store.getState().artist.favouriteArtists).toEqual([artist]);
+    expect(store.getState().artist.favouriteArtists).toEqual([ARTIST]);
   });
 
   it('should remove artist from favourites', async () => {
@@ -50,8 +34,8 @@ describe('useFavouriteArtists hook', () => {
     });
 
     act(() => {
-      result.current.addFavouriteArtist(artist);
-      result.current.removeFavouriteArtist(artist);
+      result.current.addFavouriteArtist(ARTIST);
+      result.current.removeFavouriteArtist(ARTIST);
     });
 
     expect(store.getState().artist.favouriteArtists).toEqual([]);

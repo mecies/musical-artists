@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { uiModule } from 'store/reducers/ui';
+import { ARTIST_MBID, RELEASE_MBID } from 'utils/mockTestData';
 
-import { useBreadcrumbs } from './useBreadcrumbs';
+import { useBreadcrumbs } from '../useBreadcrumbs';
 
 describe('useBreadcrumbs hook', () => {
   const store = createStore(
@@ -13,8 +14,6 @@ describe('useBreadcrumbs hook', () => {
     }),
   );
 
-  const mbid = 'mbid';
-  const releaseMbid = 'releaseMbid';
   const Wrapper: FC = ({ children }) => <Provider store={store}>{children}</Provider>;
 
   it('should set home page', async () => {
@@ -36,10 +35,10 @@ describe('useBreadcrumbs hook', () => {
     });
 
     act(() => {
-      result.current.setArtistPage(mbid);
+      result.current.setArtistPage(ARTIST_MBID);
     });
 
-    expect(store.getState().ui.artistMbid).toEqual(mbid);
+    expect(store.getState().ui.artistMbid).toEqual(ARTIST_MBID);
     expect(store.getState().ui.releaseMbid).toEqual('');
   });
 
@@ -49,10 +48,10 @@ describe('useBreadcrumbs hook', () => {
     });
 
     act(() => {
-      result.current.setReleasePage(mbid, releaseMbid);
+      result.current.setReleasePage(ARTIST_MBID, RELEASE_MBID);
     });
 
-    expect(store.getState().ui.artistMbid).toEqual(mbid);
-    expect(store.getState().ui.releaseMbid).toEqual(releaseMbid);
+    expect(store.getState().ui.artistMbid).toEqual(ARTIST_MBID);
+    expect(store.getState().ui.releaseMbid).toEqual(RELEASE_MBID);
   });
 });

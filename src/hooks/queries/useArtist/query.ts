@@ -6,13 +6,10 @@ const GET_ARTIST = gql`
       artist(mbid: $mbid) {
         mbid
         name
-        country
         releases {
           nodes {
             title
             mbid
-            date
-            country
           }
         }
       }

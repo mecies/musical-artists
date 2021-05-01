@@ -2,42 +2,23 @@ import React, { FC } from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { renderHook } from '@testing-library/react-hooks';
 import { Release } from 'models';
+import { ARTIST_MBID, RELEASE } from 'utils/mockTestData';
 
-import { GET_RELEASE } from './query';
-import { useRelease } from './useRelease';
+import { GET_RELEASE } from '../query';
+import { useRelease } from '../useRelease';
 
 describe('useRelease hook', () => {
-  const mbid = '06f70f0e-5612-4559-81c1-093853478505';
-  const release: Release = {
-    title: 'New Age',
-    date: '2019-04-12',
-    country: 'FR',
-    mbid,
-    recordings: {
-      nodes: [
-        {
-          mbid: '15dfb72a-95b2-466f-bba7-4b77a4c0034f',
-          title: 'New Age',
-        },
-        {
-          mbid: '2ecd464d-1f27-494b-b81e-f9cc6d4e705e',
-          title: 'Champagne',
-        },
-      ],
-    },
-  };
-
   const releaseMockQuery = {
     request: {
       query: GET_RELEASE,
       variables: {
-        mbid,
+        mbid: ARTIST_MBID,
       },
     },
     result: {
       data: {
         lookup: {
-          release,
+          release: RELEASE,
           __typename: 'LookupQuery',
         },
       },
@@ -58,7 +39,7 @@ describe('useRelease hook', () => {
       </MockedProvider>
     );
 
-    const { result, waitForNextUpdate } = renderHook(() => useRelease(mbid), {
+    const { result, waitForNextUpdate } = renderHook(() => useRelease(ARTIST_MBID), {
       wrapper,
     });
 
@@ -76,7 +57,7 @@ describe('useRelease hook', () => {
 
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeUndefined();
-    expect<Release | undefined>(result.current.data).toEqual(release);
+    expect<Release | undefined>(result.current.data).toEqual(RELEASE);
   });
 
   it('should return error when request fails', async () => {

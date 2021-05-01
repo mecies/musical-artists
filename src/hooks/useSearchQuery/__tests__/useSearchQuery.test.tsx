@@ -4,7 +4,7 @@ import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { uiModule } from 'store/reducers/ui';
 
-import { useSearchQuery } from './useSearchQuery';
+import { useSearchQuery } from '../useSearchQuery';
 
 describe('useBreadcrumbs hook', () => {
   const store = createStore(

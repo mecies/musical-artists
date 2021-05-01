@@ -2,39 +2,23 @@ import React, { FC } from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { renderHook } from '@testing-library/react-hooks';
 import { Artist } from 'models';
+import { ARTIST, ARTIST_MBID } from 'utils/mockTestData';
 
-import { GET_ARTIST } from './query';
-import { useArtist } from './useArtist';
+import { GET_ARTIST } from '../query';
+import { useArtist } from '../useArtist';
 
 describe('useArtist hook', () => {
-  const mbid = '7b24231e-faa5-4838-b6a8-6a2eb2727b37';
-  const artist: Artist = {
-    mbid,
-    name: 'KSI',
-    country: 'GB',
-    releases: {
-      nodes: [
-        {
-          title: 'Lighter',
-          mbid: 'f7e385e0-8cde-43d6-818d-990a19b0850e',
-          date: '2020-07-24',
-          country: 'XW',
-        },
-      ],
-    },
-  };
-
   const artistMockQuery = {
     request: {
       query: GET_ARTIST,
       variables: {
-        mbid,
+        mbid: ARTIST_MBID,
       },
     },
     result: {
       data: {
         lookup: {
-          artist,
+          artist: ARTIST,
           __typename: 'LookupQuery',
         },
       },
@@ -55,7 +39,7 @@ describe('useArtist hook', () => {
       </MockedProvider>
     );
 
-    const { result, waitForNextUpdate } = renderHook(() => useArtist(mbid), {
+    const { result, waitForNextUpdate } = renderHook(() => useArtist(ARTIST_MBID), {
       wrapper,
     });
 
@@ -73,7 +57,7 @@ describe('useArtist hook', () => {
 
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeUndefined();
-    expect<Artist | undefined>(result.current.data).toEqual(artist);
+    expect<Artist | undefined>(result.current.data).toEqual(ARTIST);
   });
 
   it('should return error when request fails', async () => {

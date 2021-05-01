@@ -2,10 +2,10 @@ import '@testing-library/jest-dom';
 
 import { render } from '@testing-library/react';
 
-import { Loader } from './Loader';
+import { SearchInput } from '../SearchInput';
 
 describe('SearchInput component', () => {
-  it('should render loader component', () => {
-    render(<Loader />);
+  it('should render search input component', () => {
+    render(<SearchInput />);
   });
 });
