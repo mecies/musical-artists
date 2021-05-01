@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Link,
   ListItem as MuiListItem,
   ListItemIcon,
-  ListItemProps,
+  ListItemProps as MuiListItemProps,
   ListItemText,
   makeStyles,
 } from '@material-ui/core';
 
-type Props = Omit<ListItemProps, 'button'> & {
+type ListItemProps = Omit<MuiListItemProps, 'button'> & {
   to?: string;
   text: string;
 };
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ListItem: FC<Props> = ({ to, text, children, ...props }) => {
+const ListItem = ({ to, text, children, ...props }: ListItemProps) => {
   const classes = useStyles();
 
   return (
@@ -53,3 +53,5 @@ export const ListItem: FC<Props> = ({ to, text, children, ...props }) => {
     </MuiListItem>
   );
 };
+
+export { ListItem };

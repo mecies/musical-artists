@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Card,
@@ -13,9 +13,9 @@ import {
 import { Close, Favorite, FavoriteBorder, LibraryMusic } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
 import { useFavouriteArtists } from 'hooks/useFavouriteArtists';
-import { Artist } from 'typings';
+import { Artist } from 'models';
 
-type Props = CardProps & {
+type ArtistCardProps = CardProps & {
   artist: Artist;
 };
 
@@ -50,14 +50,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ArtistCard: FC<Props> = ({ artist, ...props }) => {
+const ArtistCard = ({ artist, ...props }: ArtistCardProps) => {
   const classes = useStyles();
-  const [isSnackbardOpen, setIsSnackbardOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const { isFavouriteArtistCheck, addFavouriteArtist, removeFavouriteArtist } = useFavouriteArtists();
   const isFavouriteArtist = isFavouriteArtistCheck(artist);
   const releases = artist.releases?.nodes;
-  const artistHasRelases = !!(releases?.length && releases.length > 0);
-  const toggleSnackbarOpen = () => setIsSnackbardOpen(!isSnackbardOpen);
+  const artistHasReleases = !!(releases?.length && releases.length > 0);
+  const toggleSnackbarOpen = () => setIsSnackbarOpen(!isSnackbarOpen);
   const handleToggleFavouriteArtist = () => {
     toggleSnackbarOpen();
 
@@ -94,7 +94,7 @@ const ArtistCard: FC<Props> = ({ artist, ...props }) => {
             vertical: 'bottom',
             horizontal: 'right',
           }}
-          open={isSnackbardOpen}
+          open={isSnackbarOpen}
           autoHideDuration={6000}
           onClose={toggleSnackbarOpen}
           message={`${artist.name} ${
@@ -111,9 +111,9 @@ const ArtistCard: FC<Props> = ({ artist, ...props }) => {
       </CardActions>
       <CardContent className={classes.content}>
         <Typography className={classes.releasesTitle} variant="h6">
-          {artistHasRelases ? 'Popular releases: ' : 'Arist does not have any releases'}
+          {artistHasReleases ? 'Popular releases: ' : 'Artist does not have any releases'}
         </Typography>
-        {artistHasRelases && (
+        {artistHasReleases && (
           <List>
             {releases?.map(({ mbid, title }) => (
               <ListItem key={mbid} to={`/artist/${artist.mbid}/${mbid}`} text={title}>

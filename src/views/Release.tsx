@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { makeStyles, Typography } from '@material-ui/core';
 import { Loader } from 'components/Loader';
 import { ReleaseCard } from 'components/ReleaseCard';
+import { useRelease } from 'hooks/queries/useRelease';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
-import { useRelease } from 'hooks/useRelease';
 
 const useStyles = makeStyles((theme) => ({
   artistWrapper: {

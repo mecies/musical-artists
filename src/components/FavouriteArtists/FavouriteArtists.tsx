@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Box, BoxProps, makeStyles, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
-import { Artist } from 'typings';
+import { Artist } from 'models';
 
-type Props = BoxProps & {
+type FavouriteArtistsProps = BoxProps & {
   artists?: Artist[];
 };
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FavouriteArtists: FC<Props> = ({ artists, ...props }) => {
+const FavouriteArtists = ({ artists, ...props }: FavouriteArtistsProps) => {
   const classes = useStyles();
   const hasFavouriteArtists = artists && artists.length > 0;
 

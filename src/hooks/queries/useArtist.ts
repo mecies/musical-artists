@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { Artist } from 'typings';
+import { Artist } from 'models';
 
 type ArtistData = {
   lookup: {

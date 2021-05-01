@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Artist } from 'models';
 import { RootState } from 'store';
 import { artistModule } from 'store/reducers/artist';
-import { Artist } from 'typings';
 
 export const useFavouriteArtists = () => {
   const dispatch = useDispatch();

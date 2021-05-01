@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { makeStyles, Typography } from '@material-ui/core';
 import { ArtistCard } from 'components/ArtistCard';
 import { Loader } from 'components/Loader';
-import { useArtist } from 'hooks/useArtist';
+import { useArtist } from 'hooks/queries/useArtist';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
 
 const useStyles = makeStyles((theme) => ({

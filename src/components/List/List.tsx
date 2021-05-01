@@ -1,7 +1,5 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { List as MuiList, ListProps, makeStyles } from '@material-ui/core';
-
-type Props = ListProps;
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -11,7 +9,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const List: FC<Props> = ({ children, ...props }) => {
+const List = ({ children, ...props }: ListProps) => {
   const classes = useStyles();
 
   return (
@@ -20,3 +18,5 @@ export const List: FC<Props> = ({ children, ...props }) => {
     </MuiList>
   );
 };
+
+export { List };

@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { Release } from 'typings';
+import { Release } from 'models';
 
 type ReleaseData = {
   lookup: {

@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Box, BoxProps, CircularProgress, makeStyles } from '@material-ui/core';
 
-type Props = BoxProps;
+type LoaderProps = BoxProps;
 
 const useStyles = makeStyles((theme) => ({
   loader: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Loader: FC<Props> = (props) => {
+const Loader = (props: LoaderProps) => {
   const classes = useStyles();
 
   return (

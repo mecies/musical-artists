@@ -1,10 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
 import { Loader } from 'components/Loader';
 import { SearchInput } from 'components/SearchInput/';
-import { useArtists } from 'hooks/useArtists';
+import { useArtists } from 'hooks/queries/useArtists';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
 import { useSearchQuery } from 'hooks/useSearchQuery';
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Home: FC = () => {
+export const Home = () => {
   const classes = useStyles();
   const { setHomePage } = useBreadcrumbs();
   const { searchQuery, debouncedSearchQuery, setSearchQuery } = useSearchQuery();

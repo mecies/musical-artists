@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Artist } from 'typings';
+import { Artist } from 'models';
 
 export type InitialArtistState = {
   favouriteArtists: Artist[];

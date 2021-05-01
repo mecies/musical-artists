@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Card, CardContent, CardProps, makeStyles, Typography } from '@material-ui/core';
 import { Audiotrack } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
-import { Release } from 'typings';
+import { Release } from 'models';
 
-type Props = CardProps & {
+type ReleaseCardProps = CardProps & {
   release: Release;
 };
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ReleaseCard: FC<Props> = ({ release, ...props }) => {
+const ReleaseCard = ({ release, ...props }: ReleaseCardProps) => {
   const classes = useStyles();
   const recordings = release.recordings?.nodes;
   const hasRecordings = recordings && recordings.length > 0;
@@ -49,7 +49,7 @@ const ReleaseCard: FC<Props> = ({ release, ...props }) => {
         {hasRecordings && (
           <>
             <Typography className={classes.subtitle} variant="h6">
-              Songs in the releaase:
+              Songs in the release:
             </Typography>
             <List>
               {recordings?.map(({ mbid, title }) => (

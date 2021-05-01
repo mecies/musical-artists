@@ -60,12 +60,6 @@ module.exports = {
       },
     },
     {
-      files: ['*.test.(ts|tsx)', '*.stories.tsx', 'setupTests.ts'],
-      rules: {
-        'import/no-extraneous-dependencies': 0,
-      },
-    },
-    {
       files: ['*.js'],
       rules: {
         'import/no-extraneous-dependencies': 0,
@@ -74,6 +68,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-call': 0,
       },
     },
+    { files: ['**/store/reducers/*.ts'], rules: { 'no-param-reassign': 'off' } },
   ],
   settings: {
     react: { version: 'detect' },

@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { FormLabel, InputBase, InputBaseProps, makeStyles, Paper } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 
-type Props = InputBaseProps & {
+type SearchInputProps = InputBaseProps & {
   className?: string;
 };
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SearchInput: FC<Props> = ({ className, ...props }) => {
+const SearchInput = ({ className, ...props }: SearchInputProps) => {
   const classes = useStyles();
 
   return (
@@ -38,3 +38,5 @@ export const SearchInput: FC<Props> = ({ className, ...props }) => {
     </FormLabel>
   );
 };
+
+export { SearchInput };
