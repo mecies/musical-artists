@@ -3,7 +3,7 @@ import { Box, makeStyles, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
 import { Loader } from 'components/Loader';
-import { SearchInput } from 'components/SearchInput/';
+import { SearchInput } from 'components/SearchInput';
 import { useArtists } from 'hooks/queries/useArtists';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
 import { useSearchQuery } from 'hooks/useSearchQuery';

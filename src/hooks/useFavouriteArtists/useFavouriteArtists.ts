@@ -3,7 +3,7 @@ import { Artist } from 'models';
 import { RootState } from 'store';
 import { artistModule } from 'store/reducers/artist';
 
-export const useFavouriteArtists = () => {
+const useFavouriteArtists = () => {
   const dispatch = useDispatch();
   const favouriteArtists = useSelector<RootState, Artist[] | undefined>((state) => state.artist.favouriteArtists);
   const addFavouriteArtist = (artist: Artist) => dispatch(artistModule.actions.addArtist(artist));
@@ -18,3 +18,5 @@ export const useFavouriteArtists = () => {
     isFavouriteArtistCheck,
   };
 };
+
+export { useFavouriteArtists };

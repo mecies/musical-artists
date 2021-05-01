@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { uiModule } from 'store/reducers/ui';
 
-export const useBreadcrumbs = () => {
+const useBreadcrumbs = () => {
   const dispatch = useDispatch();
 
   const setHomePage = () => {
@@ -25,3 +25,5 @@ export const useBreadcrumbs = () => {
     setReleasePage,
   };
 };
+
+export { useBreadcrumbs };

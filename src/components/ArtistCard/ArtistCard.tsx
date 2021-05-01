@@ -79,12 +79,12 @@ const ArtistCard = ({ artist, ...props }: ArtistCardProps) => {
         <Button onClick={handleToggleFavouriteArtist} className={classes.artistButton}>
           {!isFavouriteArtist ? (
             <>
-              Add to favorites
+              Add to favourites
               <FavoriteBorder className={classes.icon} />
             </>
           ) : (
             <>
-              Remove from favorites
+              Remove from favourites
               <Favorite className={classes.icon} />
             </>
           )}
