@@ -63,14 +63,14 @@ const App: FC = () => {
           </Switch>
         </Grid>
         {isDesktop && (
-          <Grid item md={2} className={classes.dividerWrapper}>
-            <Divider className={classes.divider} orientation="vertical" variant="middle" light />
-          </Grid>
-        )}
-        {isDesktop && (
-          <Grid item md={5} className={classes.container}>
-            <FavouriteArtists className={classes.favourites} />
-          </Grid>
+          <>
+            <Grid item md={2} className={classes.dividerWrapper}>
+              <Divider className={classes.divider} orientation="vertical" variant="middle" light />
+            </Grid>
+            <Grid item md={5} className={classes.container}>
+              <FavouriteArtists className={classes.favourites} />
+            </Grid>
+          </>
         )}
       </Router>
     </Grid>

@@ -28,10 +28,13 @@ const useStyles = makeStyles((theme) => ({
   iconButton: {
     color: theme.palette.text.secondary,
   },
-  drawer: {
-    minWidth: 200,
+  drawerPaper: {
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(2),
+  },
+  drawerContent: {
+    minWidth: 200,
+    maxWidth: 300,
   },
   infoText: {
     color: theme.palette.text.secondary,
@@ -76,8 +79,8 @@ const Header = () => {
             <IconButton onClick={toggleDrawer} className={classes.iconButton}>
               {hasFavouriteArtists ? <Favorite /> : <FavoriteBorder />}
             </IconButton>
-            <Drawer classes={{ paper: classes.drawer }} anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
-              <FavouriteArtists />
+            <Drawer classes={{ paper: classes.drawerPaper }} anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
+              <FavouriteArtists className={classes.drawerContent} />
             </Drawer>
           </>
         )}
