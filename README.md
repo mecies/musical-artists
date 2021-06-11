@@ -21,6 +21,8 @@ Runs unit tests.
 
 ## Learn More
 
+### Check out the `master` branch to view the project written with [Create React App](https://create-react-app.dev/)
+
 Visit https://nextjs.org/learn to get started with Next.js.
 
 Visit https://nextjs.org/docs to view the full documentation.
