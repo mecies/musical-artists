@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { Loader } from 'components/Loader';
 import { ReleaseCard } from 'components/ReleaseCard';
 import { useRelease } from 'hooks/queries/useRelease';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
   artistWrapper: {
@@ -18,10 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Release = () => {
+const Release = () => {
   const classes = useStyles();
   const { setReleasePage } = useBreadcrumbs();
-  const { mbid, releaseMbid } = useParams<{ mbid: string; releaseMbid: string }>();
+  const { query } = useRouter();
+  const mbid = query.mbid as string;
+  const releaseMbid = query.releaseMbid as string;
   const { data: release, loading, error } = useRelease(releaseMbid);
 
   useEffect(() => {
@@ -36,3 +38,5 @@ export const Release = () => {
     </>
   );
 };
+
+export default Release;

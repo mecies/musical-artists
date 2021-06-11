@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { uiModule } from 'store/reducers/ui';
-import { useDebounce } from 'use-debounce/lib';
+import { useDebounce } from 'use-debounce';
 
 export const useSearchQuery = () => {
   const dispatch = useDispatch();

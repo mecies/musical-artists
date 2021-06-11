@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Home = () => {
+const Home = () => {
   const classes = useStyles();
   const { setHomePage } = useBreadcrumbs();
   const { searchQuery, debouncedSearchQuery, setSearchQuery } = useSearchQuery();
@@ -45,29 +45,29 @@ export const Home = () => {
   }, [setHomePage]);
 
   return (
-    <>
-      <Box className={classes.wrapper}>
-        <Typography className={classes.title} variant="h3">
-          Artist search
+    <Box className={classes.wrapper}>
+      <Typography className={classes.title} variant="h3">
+        Artist search
+      </Typography>
+      <SearchInput onChange={(e) => setSearchQuery(e.target.value)} value={searchQuery} />
+      {loading && <Loader className={classes.loader} />}
+      {error && <Typography className={classes.notFoundText}>{error.message}</Typography>}
+      {hasFoundArtists && (
+        <List>
+          {artists.map(({ mbid, name }) => (
+            <ListItem key={mbid} to={`/artist/${mbid}`} text={name}>
+              <Person className={classes.listItemIcon} />
+            </ListItem>
+          ))}
+        </List>
+      )}
+      {showEmptyResultMessage && (
+        <Typography variant="h5" className={classes.notFoundText}>
+          No artists matching search query found
         </Typography>
-        <SearchInput onChange={(e) => setSearchQuery(e.target.value)} value={searchQuery} />
-        {loading && <Loader className={classes.loader} />}
-        {error && <Typography className={classes.notFoundText}>{error.message}</Typography>}
-        {hasFoundArtists && (
-          <List>
-            {artists.map(({ mbid, name }) => (
-              <ListItem key={mbid} to={`/artist/${mbid}`} text={name}>
-                <Person className={classes.listItemIcon} />
-              </ListItem>
-            ))}
-          </List>
-        )}
-        {showEmptyResultMessage && (
-          <Typography variant="h5" className={classes.notFoundText}>
-            No artists matching search query found
-          </Typography>
-        )}
-      </Box>
-    </>
+      )}
+    </Box>
   );
 };
+
+export default Home;

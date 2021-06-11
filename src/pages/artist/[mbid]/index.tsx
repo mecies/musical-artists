@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { ArtistCard } from 'components/ArtistCard';
 import { Loader } from 'components/Loader';
 import { useArtist } from 'hooks/queries/useArtist';
 import { useBreadcrumbs } from 'hooks/useBreadcrumbs';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
   artistWrapper: {
@@ -18,9 +18,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Artist = () => {
+const Artist = () => {
   const classes = useStyles();
-  const { mbid } = useParams<{ mbid: string }>();
+  const { query } = useRouter();
+  const mbid = query.mbid as string;
   const { setArtistPage } = useBreadcrumbs();
   const { data: artist, loading, error } = useArtist(mbid);
 
@@ -36,3 +37,5 @@ export const Artist = () => {
     </>
   );
 };
+
+export default Artist;

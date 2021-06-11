@@ -1,12 +1,10 @@
-import React, { FC } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Divider, Grid, makeStyles } from '@material-ui/core';
 import { FavouriteArtists } from 'components/FavouriteArtists/FavouriteArtists';
 import { Header } from 'components/Header';
 import { useMediaQuery } from 'hooks/useMediaQuery';
-import { Artist } from 'views/Artist';
-import { Home } from 'views/Home';
-import { Release } from 'views/Release';
+import type { AppProps } from 'next/app';
+import { RootProvider } from 'providers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,28 +37,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App: FC = () => {
+function MyApp({ Component, pageProps }: AppProps) {
   const classes = useStyles();
   const { isDesktop } = useMediaQuery();
 
+  useEffect(() => {
+    // Remove the server-side injected CSS.
+    if (document) {
+      const jssStyles = document.querySelector('#jss-server-side');
+      jssStyles?.parentElement?.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
-    <Grid container className={classes.root}>
-      <Router>
+    <RootProvider>
+      <Grid container className={classes.root}>
         <Grid item xs={12} className={classes.headerWrapper}>
           <Header />
         </Grid>
         <Grid item xs={12} md={5} className={classes.container}>
-          <Switch>
-            <Route path="/artist/:mbid/:releaseMbid">
-              <Release />
-            </Route>
-            <Route path="/artist/:mbid">
-              <Artist />
-            </Route>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-          </Switch>
+          <Component {...pageProps} />
         </Grid>
         {isDesktop && (
           <>
@@ -72,9 +68,9 @@ const App: FC = () => {
             </Grid>
           </>
         )}
-      </Router>
-    </Grid>
+      </Grid>
+    </RootProvider>
   );
-};
+}
 
-export { App };
+export default MyApp;

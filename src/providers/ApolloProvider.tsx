@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ApolloClient, ApolloProvider as Provider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({

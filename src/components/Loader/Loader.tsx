@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, BoxProps, CircularProgress, makeStyles } from '@material-ui/core';
 
 type LoaderProps = BoxProps;

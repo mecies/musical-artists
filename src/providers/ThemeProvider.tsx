@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { createMuiTheme, CssBaseline, ThemeOptions, ThemeProvider as MuiThemeProvider } from '@material-ui/core';
 
 const themeOptions: ThemeOptions = {

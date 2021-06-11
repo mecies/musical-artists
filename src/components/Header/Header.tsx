@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Breadcrumbs, Drawer, IconButton, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Breadcrumbs, Drawer, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import { FavouriteArtists } from 'components/FavouriteArtists';
 import { useFavouriteArtists } from 'hooks/useFavouriteArtists';
 import { useMediaQuery } from 'hooks/useMediaQuery';
+import Link from 'next/link';
 import { RootState } from 'store';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,12 +60,16 @@ const Header = () => {
     <AppBar className={classes.wrapper} position="static">
       <Toolbar>
         <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-          <Link component={RouterLink} to="/" variant="h6" className={classes.link}>
-            Search
+          <Link href="/">
+            <Typography variant="h6" className={classes.link}>
+              Search
+            </Typography>
           </Link>
           {artistMbid && (
-            <Link component={RouterLink} to={`/artist/${artistMbid}`} variant="h6" className={classes.link}>
-              Artist
+            <Link href={`/artist/${artistMbid}`}>
+              <Typography variant="h6" className={classes.link}>
+                Artist
+              </Typography>
             </Link>
           )}
           {releaseMbid && (

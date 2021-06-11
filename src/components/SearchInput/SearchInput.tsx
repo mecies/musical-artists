@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormLabel, InputBase, InputBaseProps, makeStyles, Paper } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 

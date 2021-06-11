@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
 import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { artistModule } from 'store/reducers/artist';
@@ -22,14 +21,14 @@ describe('ArtistCard component', () => {
   );
 
   it('should display artist name', () => {
-    render(<ArtistCardWrapped />, { wrapper: MemoryRouter });
+    render(<ArtistCardWrapped />);
 
     const artistName = screen.getByText(ARTIST.name);
     expect(artistName.textContent).toEqual(ARTIST.name);
   });
 
   it("should display artist's release", () => {
-    render(<ArtistCardWrapped />, { wrapper: MemoryRouter });
+    render(<ArtistCardWrapped />);
     const release = ARTIST.releases?.nodes[0].title;
 
     if (release) {
@@ -39,7 +38,7 @@ describe('ArtistCard component', () => {
   });
 
   it('should add artist to favourites on button click', () => {
-    render(<ArtistCardWrapped />, { wrapper: MemoryRouter });
+    render(<ArtistCardWrapped />);
 
     const addToFavouritesButton = screen.getByText(/add to favourites/i);
 
@@ -57,7 +56,7 @@ describe('ArtistCard component', () => {
   });
 
   it('should remove artist from favourites on button click', () => {
-    render(<ArtistCardWrapped />, { wrapper: MemoryRouter });
+    render(<ArtistCardWrapped />);
 
     const removeFromFavouritesButton = screen.getByText(/remove from favourites/i);
 

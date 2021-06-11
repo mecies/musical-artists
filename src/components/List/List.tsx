@@ -1,4 +1,3 @@
-import React from 'react';
 import { List as MuiList, ListProps, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({

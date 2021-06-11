@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
 import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { render, screen } from '@testing-library/react';
 import { artistModule } from 'store/reducers/artist';
@@ -24,14 +23,14 @@ describe('ReleaseCard component', () => {
   );
 
   it('should display release title', () => {
-    render(<ReleaseCardWrapper />, { wrapper: MemoryRouter });
+    render(<ReleaseCardWrapper />);
 
     const releaseTitle = screen.getAllByText(RELEASE.title)[0];
     expect(releaseTitle).toBeInTheDocument();
   });
 
   it('should display recording in a release', () => {
-    render(<ReleaseCardWrapper />, { wrapper: MemoryRouter });
+    render(<ReleaseCardWrapper />);
     const recording = RELEASE.recordings?.nodes[0].title;
 
     if (recording) {

@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
 import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { render, screen } from '@testing-library/react';
 import { artistModule } from 'store/reducers/artist';
@@ -24,7 +23,7 @@ describe('FavouriteArtists component', () => {
   );
 
   it('should display artist name when user has favourite artist', () => {
-    render(<FavouriteArtistsWrapper />, { wrapper: MemoryRouter });
+    render(<FavouriteArtistsWrapper />);
     store.dispatch(artistModule.actions.addArtist(ARTIST));
 
     const artistName = screen.getByText(ARTIST.name);
@@ -32,7 +31,7 @@ describe('FavouriteArtists component', () => {
   });
 
   it('should display message when user has no favourite artists', () => {
-    render(<FavouriteArtistsWrapper />, { wrapper: MemoryRouter });
+    render(<FavouriteArtistsWrapper />);
     store.dispatch(artistModule.actions.removeArtist(ARTIST.mbid));
 
     const visitProfileMessage = screen.getByText(/visit artist profile/i);

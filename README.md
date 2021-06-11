@@ -21,6 +21,6 @@ Runs unit tests.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Visit https://nextjs.org/learn to get started with Next.js.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Visit https://nextjs.org/docs to view the full documentation.

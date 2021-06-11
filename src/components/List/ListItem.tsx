@@ -1,14 +1,12 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
-  Link,
   ListItem as MuiListItem,
   ListItemIcon,
   ListItemProps as MuiListItemProps,
   ListItemText,
   makeStyles,
 } from '@material-ui/core';
+import Link from 'next/link';
 
 type ListItemProps = Omit<MuiListItemProps, 'button'> & {
   to?: string;
@@ -41,9 +39,11 @@ const ListItem = ({ to, text, children, ...props }: ListItemProps) => {
   return (
     <MuiListItem className={classes.wrapper} {...props}>
       {to ? (
-        <Link component={RouterLink} to={to} className={classes.content}>
-          <ListItemIcon>{children}</ListItemIcon>
-          <ListItemText className={classes.text} primary={text} />
+        <Link href={to}>
+          <Box className={classes.content}>
+            <ListItemIcon>{children}</ListItemIcon>
+            <ListItemText className={classes.text} primary={text} />
+          </Box>
         </Link>
       ) : (
         <Box className={classes.content}>

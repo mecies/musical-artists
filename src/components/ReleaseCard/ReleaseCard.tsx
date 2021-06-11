@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, CardProps, makeStyles, Typography } from '@material-ui/core';
 import { Audiotrack } from '@material-ui/icons';
 import { List, ListItem } from 'components/List';

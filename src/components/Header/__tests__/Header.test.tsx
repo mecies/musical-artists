@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
 import { combineReducers, createStore } from '@reduxjs/toolkit';
 import { act, render, screen } from '@testing-library/react';
 import { artistModule } from 'store/reducers/artist';
@@ -26,7 +25,7 @@ describe('Header component', () => {
   );
 
   it('should display only search when on home page', () => {
-    render(<HeaderWrapper />, { wrapper: MemoryRouter });
+    render(<HeaderWrapper />);
 
     act(() => {
       store.dispatch(uiModule.actions.setArtistMbid(''));
@@ -41,7 +40,7 @@ describe('Header component', () => {
   });
 
   it('should display search and artist when on artist page', () => {
-    render(<HeaderWrapper />, { wrapper: MemoryRouter });
+    render(<HeaderWrapper />);
 
     act(() => {
       store.dispatch(uiModule.actions.setArtistMbid(ARTIST_MBID));
@@ -56,7 +55,7 @@ describe('Header component', () => {
   });
 
   it('should display search and artist, and release when on release page', () => {
-    render(<HeaderWrapper />, { wrapper: MemoryRouter });
+    render(<HeaderWrapper />);
 
     act(() => {
       store.dispatch(uiModule.actions.setArtistMbid(ARTIST_MBID));
