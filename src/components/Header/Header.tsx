@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       margin: theme.spacing(0, 2),
     },
+    cursor: 'pointer',
   },
   iconButton: {
     color: theme.palette.text.secondary,

@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
   },
+  link: {
+    cursor: 'pointer',
+  },
   text: {
     color: theme.palette.text.secondary,
   },
@@ -40,7 +43,7 @@ const ListItem = ({ to, text, children, ...props }: ListItemProps) => {
     <MuiListItem className={classes.wrapper} {...props}>
       {to ? (
         <Link href={to}>
-          <Box className={classes.content}>
+          <Box className={`${classes.content} ${classes.link}`}>
             <ListItemIcon>{children}</ListItemIcon>
             <ListItemText className={classes.text} primary={text} />
           </Box>
